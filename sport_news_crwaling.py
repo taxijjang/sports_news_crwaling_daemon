@@ -2,13 +2,15 @@ import requests
 from bs4 import BeautifulSoup
 import redis
 import time
-from daemon import runner
+import json
+import collections
 
 class NewsCrwaling:
 
     def __init__(self):
         self.rconn = redis.StrictRedis(host='ec2-3-34-134-147.ap-northeast-2.compute.amazonaws.com', port=6379, db=1,
                                        decode_responses=True)
+
     @property
     def naver_sports_crwaling(self):
         web_site_name = 'naver'
@@ -71,27 +73,34 @@ class NewsCrwaling:
             )
             titles = news[0].find_all('a', class_=a_tag_class_name)
 
-            news_dict = dict()
+            news_dict = collections.defaultdict(dict)
             if web_site_name == "naver":
                 for rank, title in enumerate(titles):
-                    #print(f"{rank + 1}위 : {title.text} , 주소 : {base_url + title.get('href')}")
-                    news_dict.update({title.text: base_url + title.get('href')})
-                    self.rconn.hset(web_site_name + ':' + category, title.text, base_url + title.get('href'))
+                    #data = json.dumps(},ensure_ascii=False).encode('utf-8')
+                    key = web_site_name + ':' + category
+                    news_data = {'title': title.text, 'url': base_url + title.get('href')}
+                    news_dict.update({rank : news_data})
+
+                news_dict = json.dumps(news_dict)
+                self.rconn.hmset(key, news_dict)
 
             elif web_site_name == "daum":
                 for rank, title in enumerate(titles):
-                    #print(f"{rank + 1}위 : {title.text} , 주소 : {title.get('href')}")
-                    news_dict.update({title.text: title.get('href')})
-                    self.rconn.hset(web_site_name + ':' + category, title.text, base_url + title.get('href'))
+                    #data = json.dumps(}, ensure_ascii=False).encode('utf-8')
+                    key = web_site_name + ':' + category
+                    news_dict = {'rank' : rank, 'title': title.text, 'url': title.get('href')}
+                    self.rconn.hmset(key, news_dict)
 
     def main(self):
-        self.daum_sports_crwaling
+        #self.daum_sports_crwaling
         self.naver_sports_crwaling
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     news_crwaling = NewsCrwaling()
 
-    while(True):
-        news_crwaling.main()
+    # while (True):
+    #    news_crwaling.main()
 
-        time.sleep(600)
+    #    time.sleep(600)
+    news_crwaling.main()
