@@ -5,11 +5,13 @@ import time
 import json
 import collections
 
+
 class NewsCrwaling:
 
     def __init__(self):
         self.rconn = redis.StrictRedis(host='ec2-3-34-134-147.ap-northeast-2.compute.amazonaws.com', port=6379, db=1,
                                        decode_responses=True)
+        self.redis_data_expire_time = 252000
 
     @property
     def naver_sports_crwaling(self):
@@ -25,7 +27,7 @@ class NewsCrwaling:
             volleyball='/volleyball/index.nhn',
             golf='/golf/index.nhn',
             general='/general/index.nhn',
-            esports='/esports/index.nhn',
+            esports='/esports/index.nhn'
         )
 
         select_location = '#content > div > div.home_feature > div.feature_side > div > ol'
@@ -60,6 +62,7 @@ class NewsCrwaling:
                                select_location=select_location,
                                a_tag_class_name=a_tag_class_name)
 
+
     def crwaling_operator(self, web_site_name: str, base_url: str, sport_news_category_urls: dict, select_location: str,
                           a_tag_class_name: str) -> None:
         for category, sport_news_category_url in sport_news_category_urls.items():
@@ -73,26 +76,26 @@ class NewsCrwaling:
             )
             titles = news[0].find_all('a', class_=a_tag_class_name)
 
-            news_dict = collections.defaultdict(dict)
+            news_dict = dict()
             if web_site_name == "naver":
                 for rank, title in enumerate(titles):
-                    #data = json.dumps(},ensure_ascii=False).encode('utf-8')
-                    key = web_site_name + ':' + category
                     news_data = {'title': title.text, 'url': base_url + title.get('href')}
-                    news_dict.update({rank : news_data})
+                    news_dict.update({rank: news_data})
 
-                news_dict = json.dumps(news_dict)
-                self.rconn.hmset(key, news_dict)
+
 
             elif web_site_name == "daum":
                 for rank, title in enumerate(titles):
-                    #data = json.dumps(}, ensure_ascii=False).encode('utf-8')
-                    key = web_site_name + ':' + category
-                    news_dict = {'rank' : rank, 'title': title.text, 'url': title.get('href')}
-                    self.rconn.hmset(key, news_dict)
+                    news_data = {'title': title.text, 'url': title.get('href')}
+                    news_dict.update({rank: news_data})
+
+            print(web_site_name, category, news_dict)
+            news_dict = json.dumps(news_dict, ensure_ascii=False).encode('utf-8')
+            key = web_site_name + ':' + category
+            self.rconn.set(key, news_dict, self.redis_data_expire_time)
 
     def main(self):
-        #self.daum_sports_crwaling
+        self.daum_sports_crwaling
         self.naver_sports_crwaling
 
 

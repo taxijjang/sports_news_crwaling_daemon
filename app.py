@@ -1,45 +1,31 @@
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify
 from redis import Redis
 import json
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 
-
-def RedisCheck(flat_form, category):
-    try:
-        rconn = Redis(host='ec2-3-34-134-147.ap-northeast-2.compute.amazonaws.com', port=6379, db=1,
-                      decode_responses=True)
-
-        hset_key = flat_form + ':' + category
-        data = rconn.hgetall(hset_key)
-        # print(data)
-        return data
-
-
-    except Exception as e:
-        print(str(e))
-
-
-@app.route('/')
-def index():
-    return "Hello Flask"
-
-
-@app.route('/info')
-def info():
-    return 'Info'
+rconn = Redis(host='ec2-3-34-134-147.ap-northeast-2.compute.amazonaws.com', port=6379, db=1,
+              decode_responses=True)
 
 
 @app.route('/<flat_form>/<category>')
 def news(flat_form, category):
-    news_json = RedisCheck(flat_form=flat_form, category=category)
+    response = dict(code=200, status="OK", message=[])
 
-    print(news_json)
-    return jsonify(news_json)
+    key = flat_form + ':' + category
+    try:
+        data = rconn.get(key)
+        news_json = json.loads(data)
+
+        response['message'] = news_json
+        return jsonify(response)
+    except Exception as e:
+        print(e)
+        response['code'] = 400
+        response['status'] = 'NOT_VALID_DATA'
+        return response
 
 
 if __name__ == "__main__":
     app.run()
-
-RedisCheck()
