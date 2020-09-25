@@ -99,7 +99,7 @@ class NewsCrwaling:
         self.naver_sports_crwaling
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":git
     news_crwaling = NewsCrwaling()
 
     while (True):
