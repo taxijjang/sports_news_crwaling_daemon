@@ -80,14 +80,14 @@ class NewsCrwaling:
             if web_site_name == "naver":
                 for rank, title in enumerate(titles):
                     news_data = {'title': title.text, 'url': base_url + title.get('href')}
-                    news_dict.update({rank: news_data})
+                    news_dict.update({rank + 1: news_data})
 
 
 
             elif web_site_name == "daum":
                 for rank, title in enumerate(titles):
                     news_data = {'title': title.text, 'url': title.get('href')}
-                    news_dict.update({rank: news_data})
+                    news_dict.update({rank + 1: news_data})
 
             print(web_site_name, category, news_dict)
             news_dict = json.dumps(news_dict, ensure_ascii=False).encode('utf-8')
@@ -102,8 +102,7 @@ class NewsCrwaling:
 if __name__ == "__main__":
     news_crwaling = NewsCrwaling()
 
-    # while (True):
-    #    news_crwaling.main()
+    while (True):
+       news_crwaling.main()
 
-    #    time.sleep(600)
-    news_crwaling.main()
+       time.sleep(600)
