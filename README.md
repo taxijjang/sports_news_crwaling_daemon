@@ -53,5 +53,5 @@
 
 - Daemon 실행에 따른 pid
 
-![daemon_pid](image/daemon_pid.PNG)
+![daemon_pid](image/daemon_pid.png)
 
