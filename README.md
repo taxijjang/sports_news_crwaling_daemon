@@ -23,3 +23,31 @@
 - daemon을 통하여 일정시간 마다 스포츠 뉴스를 크롤링 한다.
 - 크롤링한 뉴스를 redis에  key {플랫폼:카테고리} : value {뉴스 제목 : 뉴스 링크}로 저장
 - flask를 이용하여 redis에 저장되어 있는 데이터를 rest api를 통하여 클라이언트에게 제공
+
+### Redis를 선정한 이유
+
+- 추후 업데이트 예쩡
+
+# 결과
+
+
+### response api
+
+- Api Url
+>- hostname/<flatform>/<category>
+
+- Response_Data
+![Response Data](/image/api.PNG)
+
+
+### Redis Data keys
+
+- Redis에 저장된 key의 목록
+![redis_keys](/image/redis_keys.PNG)
+
+
+### Daemon 실행에 따른 pid
+
+- Daemon 실행에 따른 pid
+![daemon_pid](image/daemon_pid.PNG)
+
