@@ -34,20 +34,24 @@
 ### response api
 
 - Api Url
->- hostname/<flatform>/<category>
+
+>- hostname/(flatform)/(category)
 
 - Response_Data
+
 ![Response Data](/image/api.PNG)
 
 
 ### Redis Data keys
 
 - Redis에 저장된 key의 목록
+
 ![redis_keys](/image/redis_keys.PNG)
 
 
 ### Daemon 실행에 따른 pid
 
 - Daemon 실행에 따른 pid
+
 ![daemon_pid](image/daemon_pid.PNG)
 
