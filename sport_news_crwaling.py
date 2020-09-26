@@ -51,7 +51,7 @@ class NewsCrwaling:
 
         sport_news_category_urls = dict(
             baseball='baseball',
-            worldbaseball='worldbaseball',
+            wbaseball='worldbaseball',
             football='soccer',
             basketball='basketball',
             volleyball='volleyball',
