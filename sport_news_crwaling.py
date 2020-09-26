@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 import redis
 import time
 import json
-import collections
 
 
 class NewsCrwaling:
@@ -12,22 +11,29 @@ class NewsCrwaling:
         self.rconn = redis.StrictRedis(host='ec2-3-34-134-147.ap-northeast-2.compute.amazonaws.com', port=6379, db=1,
                                        decode_responses=True)
         self.redis_data_expire_time = 252000
+    @property
+    def flat_form_list(self):
+        keys = 'flat_form_list'
+        flat_form_lists = ['naver', 'daum']
+
+        for flat_form_list in flat_form_lists:
+            self.rconn.sadd(keys, flat_form_list)
 
     @property
     def naver_sports_crwaling(self):
         web_site_name = 'naver'
-        base_url = "https://sports.news.naver.com"
+        base_url = "https://sports.news.naver.com/"
 
         sport_news_category_urls = dict(
-            baseball='/kbaseball/index.nhn',
-            wbaseball='/wbaseball/index.nhn',
-            football='/kfootball/index.nhn',
-            wfootball='/wfootball/index.nhn',
-            basketball='/basketball/index.nhn',
-            volleyball='/volleyball/index.nhn',
-            golf='/golf/index.nhn',
-            general='/general/index.nhn',
-            esports='/esports/index.nhn'
+            baseball='kbaseball/index.nhn',
+            wbaseball='wbaseball/index.nhn',
+            football='kfootball/index.nhn',
+            wfootball='wfootball/index.nhn',
+            basketball='basketball/index.nhn',
+            volleyball='volleyball/index.nhn',
+            golf='golf/index.nhn',
+            general='general/index.nhn',
+            esports='esports/index.nhn'
         )
 
         select_location = '#content > div > div.home_feature > div.feature_side > div > ol'
@@ -44,12 +50,12 @@ class NewsCrwaling:
         base_url = "https://sports.daum.net/"
 
         sport_news_category_urls = dict(
-            soccer='soccer',
             baseball='baseball',
             worldbaseball='worldbaseball',
-            golf='golf',
+            football='soccer',
             basketball='basketball',
             volleyball='volleyball',
+            golf='golf',
             general='general',
             esports='esports',
         )
@@ -95,6 +101,7 @@ class NewsCrwaling:
             self.rconn.set(key, news_dict, self.redis_data_expire_time)
 
     def main(self):
+        self.flat_form_list
         self.daum_sports_crwaling
         self.naver_sports_crwaling
 
