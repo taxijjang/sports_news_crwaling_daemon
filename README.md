@@ -1,9 +1,10 @@
 # sports_news_crwaling_daemon
 
-
+### V1
+ - https://github.com/taxijjang/sportsnews
+ - 서버 개발자 초기에 만든 api
 
 ### 목적
-
 - 인터넷 스포츠 뉴스를 많이보는데 뉴스를 보기 위해 매번 브라우저를 통하는 번거러움을 해소 하기 위함
 
 ### 개요
