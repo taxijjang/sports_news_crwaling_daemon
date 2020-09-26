@@ -1,5 +1,7 @@
 # sports_news_crwaling_daemon
 
+### V1
+ - https://github.com/taxijjang/sportsnews
 
 
 ### 목적
