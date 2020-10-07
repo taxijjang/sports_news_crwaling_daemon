@@ -7,7 +7,10 @@ app.config['JSON_AS_ASCII'] = False
 
 rconn = Redis(host='ec2-3-34-134-147.ap-northeast-2.compute.amazonaws.com', port=6379, db=1,
               decode_responses=True)
-
+@app.route('/')
+def base_url():
+    response = dict(code=200, status="OK", message=[])
+    return jsonify(response)
 
 @app.route('/flat_form_list')
 def flat_form_list():
