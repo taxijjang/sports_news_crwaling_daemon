@@ -33,7 +33,7 @@
 
 ### Redis를 선정한 이유
 
-- 추후 업데이트 예쩡
+- 실시간 뉴스는 일정 시간마다 갱신이 되는 구조이다. 즉 일정 시간이 되면 사용되지 않는 데이터라 생각 하였고, 뉴스의 갱신이 되지 않은 특정 시간동안에는 데이터를 읽어 오기만 하기 때문에, 입출력이 빠른 db를 사용하면 좋을거 같다 생각 하였고, 그중 인 메모리에서 작동하는 redis가 생각이나 사용하게 되었다.
 
 # 결과
 
@@ -62,3 +62,11 @@
 
 ![daemon_pid](image/daemon_pid.png)
 
+
+### API Document
+
+- [Flat_Form_List](https://github.com/taxijjang/sports_news_crwaling_daemon/blob/master/api_document.md#flat_form_list-flat_form_list)
+
+- [Category_List](https://github.com/taxijjang/sports_news_crwaling_daemon/blob/master/api_document.md#category_list-flat_form_listflat_form)
+
+- [News_List](https://github.com/taxijjang/sports_news_crwaling_daemon/blob/master/api_document.md#news_list-flat_form_listcategory)
