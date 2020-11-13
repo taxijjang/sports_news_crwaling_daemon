@@ -15,7 +15,7 @@
 
 ### 구성요소
 
-- 클라이언트 ( 웹 or 안드로이드)
+- 클라이언트 (텔레그램 챗 봇)
 
 - 서버 (flask, daemon, redis)
 
@@ -70,3 +70,7 @@
 - [Category_List](https://github.com/taxijjang/sports_news_crwaling_daemon/blob/master/api_document.md#category_list-flat_form_listflat_form)
 
 - [News_List](https://github.com/taxijjang/sports_news_crwaling_daemon/blob/master/api_document.md#news_list-flat_form_listcategory)
+
+
+### 동작영상
+- [텔레그램 챗봇](https://www.youtube.com/watch?v=BoiQiSIqQh4)
