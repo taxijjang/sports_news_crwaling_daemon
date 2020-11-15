@@ -1,0 +1,36 @@
+  File "sport_news_crwaling.py", line 72
+    def crwaling_operator(self, web_site_name: str, base_url: str, sport_news_category_urls: dict, select_location: str,
+                                             ^
+SyntaxError: invalid syntax
+  File "sport_news_crwaling.py", line 72
+    def crwaling_operator(self, web_site_name: str, base_url: str, sport_news_category_urls: dict, select_location: str,
+                                             ^
+SyntaxError: invalid syntax
+./sport_news_crwaling.py: line 1: import: command not found
+./sport_news_crwaling.py: line 2: from: command not found
+./sport_news_crwaling.py: line 3: import: command not found
+./sport_news_crwaling.py: line 4: import: command not found
+./sport_news_crwaling.py: line 5: import: command not found
+./sport_news_crwaling.py: line 8: class: command not found
+./sport_news_crwaling.py: line 10: syntax error near unexpected token `('
+./sport_news_crwaling.py: line 10: `    def __init__(self):'
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 159-339-765
+127.0.0.1 - - [15/Nov/2020 10:08:28] "[37mGET //flat_form_list/naver HTTP/1.1[0m" 200 -
+127.0.0.1 - - [15/Nov/2020 10:08:30] "[37mGET //naver/wfootball HTTP/1.1[0m" 200 -
+127.0.0.1 - - [15/Nov/2020 10:10:26] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [15/Nov/2020 10:10:29] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [15/Nov/2020 10:11:13] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [15/Nov/2020 10:11:18] "[37mGET /flat_form_list HTTP/1.1[0m" 200 -
+127.0.0.1 - - [15/Nov/2020 10:11:21] "[37mGET /flat_form_list HTTP/1.1[0m" 200 -
+127.0.0.1 - - [15/Nov/2020 10:11:21] "[37mGET /flat_form_list HTTP/1.1[0m" 200 -
+127.0.0.1 - - [15/Nov/2020 10:11:22] "[37mGET /flat_form_list HTTP/1.1[0m" 200 -
+222.99.84.101 - - [15/Nov/2020 10:12:54] "[37mGET /flat_form_list HTTP/1.1[0m" 200 -
+222.99.84.101 - - [15/Nov/2020 10:12:54] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -

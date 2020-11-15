@@ -69,8 +69,8 @@ class NewsCrwaling:
                                a_tag_class_name=a_tag_class_name)
 
 
-    def crwaling_operator(self, web_site_name: str, base_url: str, sport_news_category_urls: dict, select_location: str,
-                          a_tag_class_name: str) -> None:
+    def crwaling_operator(self, web_site_name, base_url, sport_news_category_urls, select_location,
+                          a_tag_class_name):
         for category, sport_news_category_url in sport_news_category_urls.items():
             req = requests.get(base_url + sport_news_category_url)
             html = req.text
